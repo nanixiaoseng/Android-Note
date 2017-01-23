@@ -70,6 +70,8 @@
 --
 Android中布局经常有这样的布局形式：
 
+![](https://github.com/nanixiaoseng/Android-Note/blob/master/img/img_login_dq.png "img")
+
 直接输入两个空格会合并成一个空格，如果是4个字和两个字就没法对齐了
 
 
