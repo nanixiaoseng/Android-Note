@@ -5,9 +5,8 @@
 * [1.广播的安全性问题以及本地广播](#广播的安全性问题以及本地广播)
 * [2.主线程向子线程发送消息](#主线程向子线程发送消息)
 * [3.空格对齐问题](#空格对齐问题)
-* [4.使用ScrollView属性fillViewport解决android布局不能撑满全屏的问题](使用ScrollView属性fillViewport解决android布局不能撑满全屏的问题)
-
-
+* [4.使用ScrollView属性fillViewport解决android布局不能撑满全屏的问题](#使用ScrollView属性fillViewport解决android布局不能撑满全屏的问题)
+ 
 
 
 
@@ -79,10 +78,14 @@ Android中布局经常有这样的布局形式：
 |2| ```&ensp;``` | ```&#8194;```  | 半角空格，长度等于半个中文字符
 |3| ```&emsp;``` | ```&#8195;```  | 全角空格，长度等于一个中文字符
 注：使用编号就可以了
-
+ 
 ### 使用ScrollView属性fillViewport解决android布局不能撑满全屏的问题
 --
 项目中经常有这样的场景：中间内容长度不固定，当内容不够一屏幕底下两个按钮要在屏幕底部，当内容超过一屏幕按钮在内容下面，滑动后才能显示按钮。
+
+![](https://github.com/nanixiaoseng/Android-Note/blob/master/img/scrollview_fillveewport1.png) 
+
+![](https://github.com/nanixiaoseng/Android-Note/blob/master/img/scrollview_fillveewport2.png)
 
 下面是一个简单的实现方法：
 ```
