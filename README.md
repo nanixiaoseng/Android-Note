@@ -5,9 +5,7 @@
 * [1.广播的安全性问题以及本地广播](#广播的安全性问题以及本地广播)
 * [2.主线程向子线程发送消息](#主线程向子线程发送消息)
 * [3.空格对齐问题](#空格对齐问题)
-
-
-
+* [4.使用ScrollView属性fillViewport解决android布局不能撑满全屏的问题](使用ScrollView属性fillViewport解决android布局不能撑满全屏的问题)
 
 
 
@@ -81,3 +79,65 @@ Android中布局经常有这样的布局形式：
 |2| ```&ensp;``` | ```&#8194;```  | 半角空格，长度等于半个中文字符
 |3| ```&emsp;``` | ```&#8195;```  | 全角空格，长度等于一个中文字符
 注：使用编号就可以了
+
+### 使用ScrollView属性fillViewport解决android布局不能撑满全屏的问题
+--
+项目中经常有这样的场景：中间内容长度不固定，当内容不够一屏幕底下两个按钮要在屏幕底部，当内容超过一屏幕按钮在内容下面，滑动后才能显示按钮。
+
+下面是一个简单的实现方法：
+```
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="用户协议"/>
+
+        <View android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:background="@color/colorPrimary"
+            android:paddingTop="@dimen/activity_vertical_margin"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:lineSpacingExtra="5dp"
+            android:text="@string/agreement"
+            android:textColor="@color/colorPrimary"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View android:id="@+id/view_mid"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"/>
+
+            <Button android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/view_mid"
+                android:layout_toStartOf="@id/view_mid"
+                android:text="同意"/>
+
+            <Button android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/view_mid"
+                android:layout_toRightOf="@id/view_mid"
+                android:text="取消"/>
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
+```
+把```android:fillViewport="true"```改为false大家可以试一下效果是相差很大的。
