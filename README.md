@@ -5,8 +5,8 @@
 * [1.广播的安全性问题以及本地广播](#广播的安全性问题以及本地广播)
 * [2.主线程向子线程发送消息](#主线程向子线程发送消息)
 * [3.空格对齐问题](#空格对齐问题)
-* [4.使用ScrollView属性fillViewport解决android布局不能撑满全屏的问题](#使用ScrollView属性fillViewport解决android布局不能撑满全屏的问题)
- 
+* [4.使用fillViewport解决布局不能撑满全屏的问题](#使用fillViewport解决布局不能撑满全屏的问题)
+* [5.clipToPadding和clipChildren的作用](#clipToPadding和clipChildren的作用)
 
 
 
@@ -62,7 +62,7 @@
 ```
  这样就可以了，还要注意的是 Looper.prepare()与 Looper.loop()是一个回路，Looper.loop()之后的代码是执行不到的。  
  3. 你发现这个Handler属于子线程但是handleMessage里面是可以更新UI的，这一点不是很理解，请知道的同学能不吝赐教。
- 
+
 ### 空格对齐问题
 --
 Android中布局经常有这样的布局形式：
@@ -74,12 +74,12 @@ Android中布局经常有这样的布局形式：
 
 |#|名称|编号|描述|
 |---|----|-----|------
-|1| ```&nbsp;``` | ```&#160;```   | 不断行的空格，长度与常规空格相同
+|1| ```&nbsp;``` | ```&#160;```   | 不断行的空格，长度与常规空格相同
 |2| ```&ensp;``` | ```&#8194;```  | 半角空格，长度等于半个中文字符
 |3| ```&emsp;``` | ```&#8195;```  | 全角空格，长度等于一个中文字符
-注：使用编号就可以了
- 
-### 使用ScrollView属性fillViewport解决android布局不能撑满全屏的问题
+注：使用编号就可以了  
+
+### 使用fillViewport解决布局不能撑满全屏的问题
 --
 项目中经常有这样的场景：中间内容长度不固定，当内容不够一屏幕底下两个按钮要在屏幕底部，当内容超过一屏幕按钮在内容下面，滑动后才能显示按钮。
 
@@ -144,3 +144,11 @@ Android中布局经常有这样的布局形式：
 </ScrollView>
 ```
 把```android:fillViewport="true"```改为false大家可以试一下效果是相差很大的。
+
+### clipToPadding和clipChildren的作用 
+---
+clipToPadding:控件的绘制区域是否在padding里面, 值为true时padding那么绘制的区域就不包括padding区域;
+
+clipChildren:当ViewGroup的Padding不为0时，定义ViewGroup是否裁剪子孩子的填充。
+
+这两个属性默认是true的，所以在设置了padding情况下，视图默认绘制是在padding内部的，把这两个属性设置了false那么这样子控件就能画到padding的区域了。
