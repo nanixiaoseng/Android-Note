@@ -6,7 +6,7 @@
 * [2.主线程向子线程发送消息](#主线程向子线程发送消息)
 * [3.空格对齐问题](#空格对齐问题)
 * [4.使用fillViewport解决布局不能撑满全屏的问题](#解决布局不能撑满全屏的问题)
-* [5.clipToPadding和clipChildren的作用](#clipToPadding和clipChildren的作用)
+* [5.clipToPadding和clipChildren的作用](#clipToPadding_clipChildren)
 
 ### 广播的安全性问题以及本地广播
 
@@ -142,7 +142,7 @@ Android中布局经常有这样的布局形式：
 ```
 把```android:fillViewport="true"```改为false大家可以试一下效果是相差很大的。
 
-### clipToPadding和clipChildren的作用
+### clipToPadding_clipChildren
 
 clipToPadding:控件的绘制区域是否在padding里面, 值为true时padding那么绘制的区域就不包括padding区域;
 
