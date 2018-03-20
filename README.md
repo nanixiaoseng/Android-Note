@@ -8,9 +8,6 @@
 * [4.使用fillViewport解决布局不能撑满全屏的问题](#使用fillViewport解决布局不能撑满全屏的问题)
 * [5.clipToPadding和clipChildren的作用](#clipToPadding和clipChildren的作用)
 
-
-
-
 ### 广播的安全性问题以及本地广播
 
   * 大家都知道广播是系统级别的可以在应用间传播，应用A发送的广播应用B也可以接收到，但有时候我们传递的数据不希望别人接收到哪怎么办呢？
@@ -20,7 +17,7 @@
   * 第二种方法是使用v4包里面的本地广播LocalBroadcastManager。因为本地广播LocalBroadcastManager实质是Handler加接口会调的方式，数据在本应用   范围内传播，不用担心隐私数据泄露的问题。 不用担心别的应用伪造广播，造成安全隐患。 相比在系统内发送全局广播，它更高效。  
 
 ### 主线程向子线程发送消息
---
+
 一般我们Handler是用在子线程执行耗时任务后发送消息到主线程更新UI的，但是能不能主线程向子线程发送消息呢？答案是可以的。  
  1. 首先主线程向子线程发送消息的话，就必须要让Handler属于子线程，就要在子线程创建这个Handler.直接new Handler会报错java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare()，提示缺少Looper。
   ```java
@@ -61,10 +58,10 @@
         }.start();
 ```
  这样就可以了，还要注意的是 Looper.prepare()与 Looper.loop()是一个回路，Looper.loop()之后的代码是执行不到的。  
- 3. 你发现这个Handler属于子线程但是handleMessage里面是可以更新UI的，这一点不是很理解，请知道的同学能不吝赐教。
+ 3. 你发现这个Handler属于子线程，可以在handleMessage里面弹Toast，但是不可以更新UI的。
 
 ### 空格对齐问题
---
+
 Android中布局经常有这样的布局形式：
 
 ![](https://github.com/nanixiaoseng/Android-Note/blob/master/img/img_login_dq.png "img")
@@ -80,7 +77,7 @@ Android中布局经常有这样的布局形式：
 注：使用编号就可以了  
 
 ### 使用fillViewport解决布局不能撑满全屏的问题
---
+
 项目中经常有这样的场景：中间内容长度不固定，当内容不够一屏幕底下两个按钮要在屏幕底部，当内容超过一屏幕按钮在内容下面，滑动后才能显示按钮。
 
 ![](https://github.com/nanixiaoseng/Android-Note/blob/master/img/scrollview_fillveewport1.png) 
@@ -145,8 +142,8 @@ Android中布局经常有这样的布局形式：
 ```
 把```android:fillViewport="true"```改为false大家可以试一下效果是相差很大的。
 
-### clipToPadding和clipChildren的作用 
----
+### clipToPadding和clipChildren的作用
+
 clipToPadding:控件的绘制区域是否在padding里面, 值为true时padding那么绘制的区域就不包括padding区域;
 
 clipChildren:当ViewGroup的Padding不为0时，定义ViewGroup是否裁剪子孩子的填充。
